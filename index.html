@@ -1,0 +1,108 @@
+<html>
+<head>
+<title>Naggy Ah Ma</title>
+<style>
+
+.main {
+	max-width: 940px;
+	margin: 100px auto;
+}
+
+#the_form {
+	width: 800px;
+	margin: 0 auto;
+}
+
+#the_input {
+	font-size: 36px;
+	height: 50px;
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid #222;
+}
+
+#the_input:focus {
+	outline: none;
+}
+
+#the_btn, #the_other_btn {
+	display: block;
+	height: 50px;
+	width: 200px;
+	margin: 30px auto;
+	font-size: 26px;
+	color: white;
+}
+
+#the_btn {
+	background: green;
+}
+
+#the_other_btn {
+	background: red;
+}
+
+.main h1 {
+	font-size: 50px;
+	text-align: center;
+}
+#the_other_btn {
+	display: none;
+}
+</style>
+</head>
+<body>
+	<div class="main">
+    <h1> What task do you need a reminder for?</h1>
+	  <form action="#" method="post" id="the_form">
+		  <input type="text" id="the_input"/>
+	    <input type="button" id='the_btn' value="Start" onclick="the_submit()"/>
+		  <input type="button" id='the_other_btn' value="Stop" onclick="interval_matter(false)"/>
+	  </form>
+	</div>
+
+
+	<script type="text/javascript">
+	 var timer;
+	  function the_submit() {
+      var txt = document.getElementById("the_input").value;
+		  if(txt) {
+			  localStorage.setItem("input", txt);
+			  showNotification();
+			  //document.getElementById("the_form").reset();
+				document.getElementById("the_input").disabled = true;
+				document.getElementById("the_btn").style.display = "none";
+				document.getElementById("the_other_btn").style.display = "block";
+		  }
+    }
+
+		function showNotification() {
+			the_body = localStorage.getItem("input");
+			if(window.Notification) {
+				Notification.requestPermission(function(status) {
+					console.log('Status: ', status);
+					var n = new Notification('Task Reminder', { body: the_body });
+					interval_matter(true);
+				});
+			}
+			else {
+				alert('Your browser doesn\'t support notifications.');
+			}
+		}
+
+		function interval_matter(flag) {
+			if(flag){
+			 timer = setTimeout(showNotification, 120*1000);
+			} else {
+					clearTimeout(timer);
+					document.getElementById("the_btn").style.display = "block";
+					document.getElementById("the_other_btn").style.display = "none";
+					document.getElementById("the_input").disabled = false;
+					document.getElementById("the_form").reset();
+			}
+
+		}
+
+	</script>
+</body>
+</html>
