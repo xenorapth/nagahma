@@ -51,7 +51,7 @@
 }
 </style>
 </head>
-<body>
+<body onload="initialize()">
 	<div class="main">
     <h1> Ah Ma, remind me to...</h1>
 	  <form action="#" method="post" id="the_form">
@@ -65,6 +65,17 @@
 
 	<script type="text/javascript">
 	 var timer;
+
+	  function initialize() {
+			content = localStorage.getItem("input");
+			if(content) {
+				document.getElementById("the_input").value = content;
+				document.getElementById("the_input").disabled = true;
+				document.getElementById("the_btn").style.display = "none";
+				document.getElementById("the_other_btn").style.display = "block";
+				showNotification();
+			}
+		}
 	  function the_submit() {
       var txt = document.getElementById("the_input").value;
 		  if(txt) {
