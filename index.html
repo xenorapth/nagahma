@@ -6,6 +6,7 @@
 .main {
 	max-width: 940px;
 	margin: 100px auto;
+	text-align: center;
 }
 
 #the_form {
@@ -53,6 +54,7 @@
 </head>
 <body onload="initialize()">
 	<div class="main">
+		<img src='ahma.jpg'/>
     <h1> Ah Ma, remind me to...</h1>
 	  <form action="#" method="post" id="the_form">
 		  <input type="text" id="the_input"/>
@@ -93,7 +95,7 @@
 			if(window.Notification) {
 				Notification.requestPermission(function(status) {
 					console.log('Status: ', status);
-					var n = new Notification('Ah Ma says', { body: the_body });
+					var n = new Notification('Ah Ma says', { body: the_body, icon: 'ahma.jpg' });
 					interval_matter(true);
 				});
 			}
