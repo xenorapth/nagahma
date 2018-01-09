@@ -53,7 +53,7 @@
 </head>
 <body>
 	<div class="main">
-    <h1> What task do you need a reminder for?</h1>
+    <h1> Ah Ma, remind me to...</h1>
 	  <form action="#" method="post" id="the_form">
 		  <input type="text" id="the_input"/>
 	    <input type="button" id='the_btn' value="Start" onclick="the_submit()"/>
@@ -81,7 +81,7 @@
 			if(window.Notification) {
 				Notification.requestPermission(function(status) {
 					console.log('Status: ', status);
-					var n = new Notification('Task Reminder', { body: the_body });
+					var n = new Notification('Ah Ma says', { body: the_body });
 					interval_matter(true);
 				});
 			}
