@@ -109,6 +109,7 @@
 			 timer = setTimeout(showNotification, 120*1000);
 			} else {
 					clearTimeout(timer);
+					localStorage.removeItem("input");
 					document.getElementById("the_btn").style.display = "block";
 					document.getElementById("the_other_btn").style.display = "none";
 					document.getElementById("the_input").disabled = false;
