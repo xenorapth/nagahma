@@ -26,6 +26,10 @@
 	outline: none;
 }
 
+#checkie {
+	margin-top: 20px;
+}
+
 #the_btn, #the_other_btn {
 	display: block;
 	height: 50px;
@@ -58,6 +62,7 @@
     <h1> Ah Ma, remind me to...</h1>
 	  <form action="#" method="post" id="the_form">
 		  <input type="text" id="the_input"/>
+			<div id="checkboxer"><input type="checkbox" name="ahmageddon" value="ahmageddon" id='checkie'> Activate AhMageddon (Try it out ;))</div>
 	    <input type="button" id='the_btn' value="Start" onclick="the_submit()"/>
 		  <input type="button" id='the_other_btn' value="Stop" onclick="interval_matter(false)"/>
 	  </form>
@@ -80,17 +85,19 @@
 		}
 	  function the_submit() {
       var txt = document.getElementById("the_input").value;
+			var check = document.getElementById('checkie');
 		  if(txt) {
 			  localStorage.setItem("input", txt);
-			  showNotification();
-			  //document.getElementById("the_form").reset();
+				localStorage.setItem("ahmageddon", check.checked);
+				showNotification();
 				document.getElementById("the_input").disabled = true;
 				document.getElementById("the_btn").style.display = "none";
+				document.getElementById("checkboxer").style.display = "none";
 				document.getElementById("the_other_btn").style.display = "block";
 		  }
     }
 
-		function showNotification() {
+		function showNotification(flag = false) {
 			the_body = localStorage.getItem("input");
 			if(window.Notification) {
 				Notification.requestPermission(function(status) {
@@ -105,13 +112,21 @@
 		}
 
 		function interval_matter(flag) {
+			ahmageddon = localStorage.getItem("ahmageddon");
 			if(flag){
-			 timer = setTimeout(showNotification, 120*1000);
+				if(ahmageddon === 'true') {
+					timer = setTimeout(showNotification, 5*1000);
+				} else {
+					timer = setTimeout(showNotification, 120*1000);
+				}
+
 			} else {
 					clearTimeout(timer);
 					localStorage.removeItem("input");
+					localStorage.removeItem("ahmageddon");
 					document.getElementById("the_btn").style.display = "block";
 					document.getElementById("the_other_btn").style.display = "none";
+					document.getElementById("checkboxer").style.display = "block";
 					document.getElementById("the_input").disabled = false;
 					document.getElementById("the_form").reset();
 			}
