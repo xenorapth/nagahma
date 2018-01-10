@@ -60,10 +60,10 @@
 	<div class="main">
 		<img src='ahma.jpg'/>
     <h1> Ah Ma, remind me to...</h1>
-	  <form action="#" method="post" id="the_form">
+	  <form action="#" onSubmit="the_submit()" id="the_form">
 		  <input type="text" id="the_input" placeholder="Type something here laa"/>
 			<div id="checkboxer"><input type="checkbox" name="ahmageddon" value="ahmageddon" id='checkie'> Activate AhMageddon (Try it out ;))</div>
-	    <input type="button" id='the_btn' value="Start" onclick="the_submit()"/>
+	    <input type="submit" id='the_btn' value="Start" />
 		  <input type="button" id='the_other_btn' value="Stop" onclick="interval_matter(false)"/>
 	  </form>
 		<p>Lai. Let Ah Ma help remind you on that important thing you have to do, every 2 minute. Whenever you get distracted / not focusing on what you need to do, Ah Ma will be there to nag at you. The only difference here? You can ask Ah Ma to stop nagging. [Not applicable in real life, try at your own risk]  </p>
